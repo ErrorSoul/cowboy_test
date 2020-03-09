@@ -7,6 +7,6 @@ RUN apk add make
 WORKDIR /app
 
 COPY . ./
-RUN make rel
+RUN make
 EXPOSE 8080
 CMD ["./_rel/hello_erlang_release/bin/hello_erlang_release", "foreground" ]
