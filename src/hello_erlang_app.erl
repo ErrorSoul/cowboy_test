@@ -7,8 +7,8 @@
 start(_Type, _Args) ->
   Dispatch = cowboy_router:compile([
         {'_', [
-               {"/", hello_handler, []},
-               {"/:id", half_handler, []}
+               {"/x/:id", half_handler, []},
+               {"/", hello_handler, []}
               ]}
     ]),
     {ok, _} = cowboy:start_clear(http_listener,
