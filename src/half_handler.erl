@@ -17,8 +17,8 @@ init(Req0, State) ->
 
 
 insert_to_db(ID) ->
-  {ok, Conn} = epgsql:connect("database", "postgres",
-      #{database => "docker", timeout => 10}
+  {ok, Conn} = epgsql:connect("db", "example", "example",
+      #{database => "example", timeout => 10}
     ),
   Message = string:join(["my_message is", binary_to_list(ID)], " "),
   Squery = string:join(["insert into score(message) values('", Message ,"');"], " "),
