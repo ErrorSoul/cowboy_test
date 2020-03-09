@@ -17,13 +17,13 @@ init(Req0, State) ->
 
 
 insert_to_db(ID) ->
-  {ok, Conn} = epgsql:connect("db", "example", "example",
-      #{database => "example", timeout => 10}
-    ),
+  %% {ok, Conn} = epgsql:connect("db", "example", "example",
+  %%     #{database => "example", timeout => 10}
+  %%   ),
   Message = string:join(["my_message is", binary_to_list(ID)], " "),
   Squery = string:join(["insert into score(message) values('", Message ,"');"], " "),
-  {R, Num} = epgsql:squery(Conn, Squery),
-  epgsql:close(Conn),
+  {R, Num} = db_psgrsql ! {query, Squery},
+  %epgsql:close(Conn),
   error_logger:info_msg('SQL RESULT is is .... ~p ', [{R, Num}]),
   {R, Num}.
 
@@ -44,3 +44,4 @@ insert_to_db(ID) ->
 %% {ok, Conn} = epgsql:connect("database", "postgres",
   %%     #{database => "docker", timeout => 100}
   %%   ),
+%% SELECT * FROM pg_catalog.pg_tables WHERE schemaname != 'pg_catalog' AND schemaname != 'information_schema';"
