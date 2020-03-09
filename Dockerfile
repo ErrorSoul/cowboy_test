@@ -5,7 +5,7 @@ RUN wget https://erlang.mk/erlang.mk
 RUN apk add make
 
 WORKDIR /app
-MKDIR /app/deps
+RUN mkdir /app/deps
 
 COPY . ./
 RUN make run
