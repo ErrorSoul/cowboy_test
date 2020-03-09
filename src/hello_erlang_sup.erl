@@ -8,8 +8,8 @@ start_link() ->
 	supervisor:start_link({local, ?MODULE}, ?MODULE, []).
 
 init([]) ->
-  {ok, Conn} = epgsql:connect("database", "postgres",
-      #{database => "docker", timeout => 10}
+  {ok, Conn} = epgsql:connect("db", "example",
+      #{database => "example", timeout => 10}
   ),
   register(dconn, Conn),
 	Procs = [],

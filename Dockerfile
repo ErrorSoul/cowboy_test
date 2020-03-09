@@ -5,9 +5,8 @@ RUN wget https://erlang.mk/erlang.mk
 RUN apk add make
 
 WORKDIR /app
-RUN mkdir /app/deps
 
 COPY . ./
-RUN make run
+RUN make rel
 EXPOSE 8080
 CMD ["./_rel/hello_erlang_release/bin/hello_erlang_release", "foreground" ]
