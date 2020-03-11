@@ -22,7 +22,9 @@ insert_to_db(ID) ->
   %%   ),
   Message = string:join(["my_message is", binary_to_list(ID)], " "),
   Squery = string:join(["insert into score(message) values('", Message ,"');"], " "),
-  {R, Num} = db_psgrsql ! {query, Squery},
+  error_logger:info_msg('to redis ~p ', [["SET", erlang:system_time(seconds), Squery]]),
+  X = ["SET", erlang:system_time(seconds), Squery],
+  {R, Num} = db_psgrsql ! {query, X},
   %epgsql:close(Conn),
   error_logger:info_msg('SQL RESULT is is .... ~p ', [{R, Num}]),
   {R, Num}.
